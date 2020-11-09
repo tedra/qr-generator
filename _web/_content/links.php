@@ -31,8 +31,7 @@
 <tbody>
 <?php for ($x=0;$x<sizeof($links);$x++) { ?>
 <tr<?php if (isset($_POST['new']) && $_POST['new'] == 1 && $x == 0) { echo " class='table-warning'"; }?>>
-  <td><a href="https://filter.ar/<?php echo $links[$x]['uri'];?>">https://filter.ar/<?php echo $links[$x]['uri'];?></a><br />
-  <small><i>Links to: <?php echo $links[$x]['link'];?></i></small><br />
+  <td><a href="https://filter.ar/<?php echo $links[$x]['uri'];?>"><?php echo $links[$x]['title'];?></a><br />
   <td><?php echo $links[$x]['usage']?></td>
   <td class="text-right">
     <div class="btn-group">
