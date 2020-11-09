@@ -9,26 +9,61 @@
   } catch (PDOException $e) {
    echo $e->getMessage();
   }
+
 ?>
-<table class="table table-striped table-bordered">
+
+<?php if (isset($_POST['new']) && $_POST['new'] == 1) { ?>
+  <div class="alert alert-success" role="alert">New QR code created. See details below.</div>
+<?php } ?>
+
+<?php if (isset($_POST['delete']) && $_POST['delete'] == 1) { ?>
+  <div class="alert alert-warning" role="alert">QR code deleted.</div>
+<?php } ?>
+
+<table class="table">
 <thead>
   <tr>
-    <td>Link</td>
-    <td>Scans</td>
-    <td></td>
+    <th scope="col">Link</th>
+    <th scope="col">Scans</th>
+    <th scope="col"></th>
   </tr>
 </thead>
 <tbody>
 <?php for ($x=0;$x<sizeof($links);$x++) { ?>
-<tr>
+<tr<?php if (isset($_POST['new']) && $_POST['new'] == 1 && $x == 0) { echo " class='table-warning'"; }?>>
   <td><a href="https://filter.ar/<?php echo $links[$x]['uri'];?>">https://filter.ar/<?php echo $links[$x]['uri'];?></a><br />
   <small><i>Links to: <?php echo $links[$x]['link'];?></i></small><br />
-  <a href="/qr/<?php echo $links[$x]['id']?>.png" download class="btn btn-sm btn-outline-secondary">Download .PNG</a>
-<a href="/qr/<?php echo $links[$x]['id']?>.eps" download class="btn btn-sm btn-outline-secondary">Download .EPS</a>
-<a href="/qr/<?php echo $links[$x]['id']?>.svg" download class="btn btn-sm btn-outline-secondary">Download .SVG</a></td>
   <td><?php echo $links[$x]['usage']?></td>
-  <td><a href="#" class="btn btn-sm btn-outline-secondary">Stats</a>&nbsp;<a href="#" class="btn btn-sm btn-outline-secondary">Edit</a>&nbsp;<a href="#" class="btn btn-sm btn-outline-danger">Delete</a></td>
+  <td class="text-right">
+    <div class="btn-group">
+      <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Actions
+      </button>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="#">Edit</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#QRModal" data-uri="<?php echo $links[$x]['uri'];?>">Preview QR code</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" download href="/qr/<?php echo $links[$x]['uri']?>.png">Download .PNG</a>
+        <a class="dropdown-item" download href="/qr/<?php echo $links[$x]['uri']?>.svg">Download .SVG</a>
+        <a class="dropdown-item" download href="/qr/<?php echo $links[$x]['uri']?>.eps">Download .EPS</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">View Statistics</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/admin/?delete=<?php echo $links[$x]['id']; ?>">Delete</a>
+
+      </div>
+    </div></td>
 </tr>
 <?php } ?>
 </tbody>
 </table>
+
+<script>
+$('#QRModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget)
+  var uri = button.data('uri')
+  var modal = $(this)
+  $('#qrmodalimg').attr('src',"/qr/"+uri+".png");
+})
+</script>

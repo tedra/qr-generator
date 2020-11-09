@@ -1,3 +1,8 @@
+<div class="container">
+<?php if (isset($error) && $error > 0) { ?>
+  <div class="alert alert-danger" role="alert"><?php echo $message; ?></div>
+<?php } ?>
+
 <div class="row">
   <div class="col-6">
 <form method="post" action="">
@@ -12,5 +17,6 @@
   </div>
   <button type="submit" class="btn btn-success">Login</button>
 </form>
+</div>
 </div>
 </div>

@@ -31,10 +31,6 @@ ini_set('session.gc_maxlifetime', 86400);
 session_set_cookie_params(86400);
 session_start();
 
-if (isset($_GET['clear']) && $_GET['clear'] == 1) {
-  session_destroy();
-}
-
 if (isset($_GET['logout']) && $_GET['logout'] == 1) {
   session_destroy();
 }
@@ -57,7 +53,7 @@ if (isset($_GET['genpass']) && $_GET['genpass'] <> '') {
   echo sha1($_GET['genpass'].$_ENV['SALT']);
 }
 
-$templates = array('admin');
+$templates = array('admin','_content');
 $error = 0;
 
 if (isset($uri[1]) && in_array($uri[1],$templates) && isset($_SESSION['loggedin']) && $_SESSION['loggedin'] > 0 && isset($_SESSION['hash']) && sha1(($_SESSION['loggedin']-$_ENV['HIDE']).$_ENV['SALT']) == $_SESSION['hash']) {
@@ -81,13 +77,9 @@ if (isset($uri[1]) && in_array($uri[1],$templates) && isset($_SESSION['loggedin'
     }
     header('location:'.$link['link']);
     exit();
-  } else {
-    if (empty($_POST['ajax']) || $_POST['ajax'] < 1) {
-      unset($_SESSION['loggedin']);
-      unset($_SESSION['hash']);
-  }
-}
+  } 
 } else {
+
   if (empty($_POST['ajax']) || $_POST['ajax'] < 1) {
     unset($_SESSION['loggedin']);
     unset($_SESSION['hash']);
@@ -117,4 +109,17 @@ if (isset($_POST['login']) && $_POST['login'] == 1 && isset($_POST['email']) && 
   }
 
 }
+
+$delete = 0;
+if (isset($_GET['delete']) && $_GET['delete'] > 0) {
+  try {
+    $data = $db->prepare("UPDATE qrcodes SET active = 0 WHERE id = :id LIMIT 1;");
+    $data->bindValue(':id', $_GET['delete'], PDO::PARAM_INT);
+    $delete = 1;
+    $data->execute();
+  } catch (PDOException $e) {
+   echo $e->getMessage();
+  }
+}
+
 ?>

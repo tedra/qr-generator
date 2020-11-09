@@ -1,2 +1,8 @@
 .env
 vendor
+_web/qr/*.png
+_web/qr/*.eps
+_web/qr/*.svg
+.DS_Store
+_web/.DS_Store
+_web/qr/.DS_Store
