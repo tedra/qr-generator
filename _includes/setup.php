@@ -10,6 +10,9 @@ if (isset($_POST['ajax']) && $_POST['ajax'] == 1) {
 }
 
 use Endroid\QrCode\QrCode;
+use Endroid\QrCode\ErrorCorrectionLevel;
+use Endroid\QrCode\Response\QrCodeResponse;
+
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__."/../");
 $dotenv->load();
 
