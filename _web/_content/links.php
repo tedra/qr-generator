@@ -23,7 +23,8 @@
 <table class="table">
 <thead>
   <tr>
-    <th scope="col">Link</th>
+    <th scope="col">Short URL</th>
+    <th scope="col">Forwarding URL</th>
     <th scope="col">Scans</th>
     <th scope="col"></th>
   </tr>
@@ -31,7 +32,8 @@
 <tbody>
 <?php for ($x=0;$x<sizeof($links);$x++) { ?>
 <tr<?php if (isset($_POST['new']) && $_POST['new'] == 1 && $x == 0) { echo " class='table-warning'"; }?>>
-  <td><a href="https://filter.ar/<?php echo $links[$x]['uri'];?>"><?php echo $links[$x]['title'];?></a><br />
+  <td><a href="https://filter.ar/<?php echo $links[$x]['uri'];?>" target="_new"><?php echo $links[$x]['title'];?></a><br />
+  <td><a href="<?php echo $links[$x]['link']?>" target="_new" class="btn btn-sm btn-outline-secondary"></a></td>
   <td><?php echo $links[$x]['usage']?></td>
   <td class="text-right">
     <div class="btn-group">

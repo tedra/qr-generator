@@ -99,6 +99,8 @@ $.ajax({
         data: { title: title, forward: forward, scheme: scheme, domain: domain, uri: uri, ajax: 1 },
         success: function(data) {
           $('#newcode-div').fadeOut('fast');
+          $('#title').val('');
+          $('#link').val('');
           $.ajax({
               type: "POST",
               url: '/_content/links.php',
@@ -114,6 +116,8 @@ $.ajax({
   $('body').on('click','#close',function(e) {
     e.stopPropagation();
     e.preventDefault();
+    $('#title').val('');
+    $('#link').val('');
     $('#newcode-div').fadeOut('fast');
   });
 
@@ -128,6 +132,8 @@ $.ajax({
           $('#uri').val(data);
         }
       });
+      $('#title').val('');
+      $('#link').val('');
     $('#newcode-div').fadeIn('fast');
   });
 </script>
