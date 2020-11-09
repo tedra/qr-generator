@@ -1,13 +1,17 @@
 <?php
 include('../../_includes/setup.php');
 
-$qrCode = new Endroid\QrCode\QrCode($_POST['forward']);
+$url = $_POST['scheme'].$_POST['domain']."/".$_POST['uri'];
+$qrCode = new Endroid\QrCode\QrCode($url);
 $qrCode->setSize(500);
 $qrCode->setMargin(10);
+$qrCode->setEncoding('UTF-8');
+$qrCode->setErrorCorrectionLevel(ErrorCorrectionLevel::MEDIUM());
+$qrCode->setValidateResult(true);
 $userid = $_SESSION['loggedin']-$_ENV['HIDE'];
 
 try {
-  $data = $db->prepare("INSERT INTO qrcodes (user_id,uri,link,active,created) VALUES (:userid,:uri,:link,1,NOW());");
+  $data = $db->prepare("INSERT INTO qrcodes (user_id,uri,link,active,`usage`,created) VALUES (:userid,:uri,:link,1,0,NOW());");
   $data->bindValue(':userid', $userid, PDO::PARAM_INT);
   $data->bindValue(':uri', $_POST['uri'], PDO::PARAM_STR);
   $data->bindValue(':link', $_POST['forward'], PDO::PARAM_STR);

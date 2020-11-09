@@ -70,7 +70,7 @@ if (isset($uri[1]) && in_array($uri[1],$templates) && isset($_SESSION['loggedin'
   }
   if (isset($link) && $link['id'] > 0) {
     try {
-      $data = $db->prepare("UPDATE qrcodes SET usage = usage + 1 WHERE uri = :link AND active = 1 LIMIT 1;");
+      $data = $db->prepare("UPDATE qrcodes SET `usage` = `usage` + 1 WHERE uri = :link AND active = 1 LIMIT 1;");
       $data->bindValue(':link', $uri[1], PDO::PARAM_STR);
       $data->execute();
     } catch (PDOException $e) {
@@ -83,7 +83,7 @@ if (isset($uri[1]) && in_array($uri[1],$templates) && isset($_SESSION['loggedin'
       unset($_SESSION['loggedin']);
       unset($_SESSION['hash']);
   }
-} 
+}
 } else {
   if (empty($_POST['ajax']) || $_POST['ajax'] < 1) {
     unset($_SESSION['loggedin']);
