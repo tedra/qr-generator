@@ -1,0 +1,13 @@
+{
+    "require": {
+        "vlucas/phpdotenv": "^5.2",
+        "endroid/qr-code": "^3.9",
+        "twbs/bootstrap": "^4.5"
+    },
+    "scripts": {
+        "post-update-cmd": [
+           "cp -R vendor/twbs/bootstrap/dist/css/* _web/css/.",
+           "cp -R vendor/twbs/bootstrap/dist/js/* _web/js/."
+        ]
+    }
+}
