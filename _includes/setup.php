@@ -75,9 +75,24 @@ if (isset($uri[1]) && in_array($uri[1],$templates) && isset($_SESSION['loggedin'
     } catch (PDOException $e) {
      echo $e->getMessage();
     }
-    header('location:'.$link['link']);
+
+    $lines = explode("/",$link['link']);
+    print_r($lines);
+?>
+<script>
+if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+setTimeout(function () {
+        window.location = "https://filter.ar/byredo/fallback";
+}, 25);
+window.location = "instagram://story-camera/?effect_id=756766785146108";
+} else {
+window.location = "https://filter.ar/byredo/fallback";
+}
+</script>
+<?php
+    //header('location:'.$link['link']);
     exit();
-  } 
+  }
 } else {
 
   if (empty($_POST['ajax']) || $_POST['ajax'] < 1) {
