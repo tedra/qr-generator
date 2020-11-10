@@ -85,7 +85,7 @@
         </button>
       </div>
       <div class="modal-body">
-        forthcoming.
+        In Development
       </div>
     </div>
   </div>
