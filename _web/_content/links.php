@@ -33,7 +33,7 @@
 <tbody>
 <?php for ($x=0;$x<sizeof($links);$x++) { ?>
 <tr<?php if (isset($_POST['new']) && $_POST['new'] == 1 && $x == 0) { echo " class='table-warning'"; }?>>
-  <td><a href="#" id="copyurl" class="btn btn-sm btn-outline-secondary"><i class="far fa-copy"></i></a></td>
+  <td><a href="https://filter.ar/<?php echo $links[$x]['uri'];?>" data-url="https://filter.ar/<?php echo $links[$x]['uri'];?>" class="copyurl btn btn-sm btn-outline-secondary"><i class="far fa-copy"></i></a></td>
   <td><a href="https://filter.ar/<?php echo $links[$x]['uri'];?>" target="_new"><?php echo $links[$x]['title'];?></a><br />
   <td><a href="<?php echo $links[$x]['link']?>" target="_new" class="btn btn-sm btn-outline-secondary"><i class="fas fa-external-link-alt"></i></a></td>
   <td><?php echo $links[$x]['usage']?></td>
@@ -69,4 +69,42 @@ $('#QRModal').on('show.bs.modal', function (event) {
   var modal = $(this)
   $('#qrmodalimg').attr('src',"/qr/"+uri+".png");
 })
+
+function fallbackCopyTextToClipboard(text) {
+var textArea = document.createElement("textarea");
+textArea.value = text;
+textArea.style.position="fixed";  //avoid scrolling to bottom
+document.body.appendChild(textArea);
+textArea.focus();
+textArea.select();
+
+try {
+  var successful = document.execCommand('copy');
+  var msg = successful ? 'successful' : 'unsuccessful';
+  console.log('Fallback: Copying text command was ' + msg);
+} catch (err) {
+  console.error('Fallback: Oops, unable to copy', err);
+}
+
+document.body.removeChild(textArea);
+}
+function copyTextToClipboard(text) {
+if (!navigator.clipboard) {
+  fallbackCopyTextToClipboard(text);
+  return;
+}
+navigator.clipboard.writeText(text).then(function() {
+  console.log('Async: Copying to clipboard was successful!');
+}, function(err) {
+  console.error('Async: Could not copy text: ', err);
+});
+}
+
+$('body').on('click','.copyurl',function(e) {
+  e.preventDefault();
+  copyTextToClipboard($(this).data('url'));
+  $(this).css('color','red');
+});
+
+
 </script>
