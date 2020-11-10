@@ -7,7 +7,6 @@ $qrCode->setSize(500);
 $qrCode->setMargin(10);
 $qrCode->setEncoding('UTF-8');
 $qrCode->setErrorCorrectionLevel(Endroid\QrCode\ErrorCorrectionLevel::MEDIUM());
-$qrCode->setValidateResult(true);
 $userid = $_SESSION['loggedin']-$_ENV['HIDE'];
 
 try {
@@ -22,8 +21,10 @@ try {
  echo $e->getMessage();
 }
 
+$qrCode->setValidateResult(true);
 $qrCode->setWriterByName('png');
 $qrCode->writeFile(__DIR__.'/../qr/'.$_POST['uri'].'.png');
+$qrCode->setValidateResult(false);
 $qrCode->setWriterByName('svg');
 $qrCode->writeFile(__DIR__.'/../qr/'.$_POST['uri'].'.svg');
 $qrCode->setWriterByName('eps');
