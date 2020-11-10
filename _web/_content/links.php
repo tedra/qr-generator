@@ -35,6 +35,7 @@ a.link:hover { text-decoration: none; border-bottom: 1px solid red; color: red; 
 <thead>
   <tr>
     <th scope="col"></th>
+    <th scope="col">Title</th>
     <th scope="col">Short URL</th>
     <th scope="col">Forwarding To</th>
     <th scope="col" style="width: 50px;">Scans</th>
@@ -47,8 +48,9 @@ a.link:hover { text-decoration: none; border-bottom: 1px solid red; color: red; 
   <td nowrap>
     <a href="#" data-toggle="modal" data-target="#QRModal" data-uri="<?php echo $links[$x]['uri'];?>"><img src="/qr/<?php echo $links[$x]['uri']?>.svg" style="width: 80px; "/></a>
     </td>
+  <td class="ellipsis" nowrap><?php echo $links[$x]['title'];?></td>
   <td class="ellipsis" nowrap>
-    <a class="link" href="https://filter.ar/<?php echo $links[$x]['uri'];?>" target="_new"><?php echo $links[$x]['title'];?></a>&nbsp;
+    <a class="link" href="https://filter.ar/<?php echo $links[$x]['uri'];?>" target="_new"><?php echo $links[$x]['uri'];?></a>&nbsp;
     <a href="https://filter.ar/<?php echo $links[$x]['uri'];?>" data-url="https://filter.ar/<?php echo $links[$x]['uri'];?>" class="copyurl btn btn-sm btn-outline-secondary"><i class="far fa-copy"></i></a>
   </td>
   <td class="ellipsis" nowrap>
