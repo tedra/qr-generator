@@ -77,16 +77,16 @@ if (isset($uri[1]) && in_array($uri[1],$templates) && isset($_SESSION['loggedin'
     }
 
     $lines = explode("/",$link['link']);
-    print_r($lines);
+
 ?>
 <script>
 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 setTimeout(function () {
-        window.location = "https://filter.ar/byredo/fallback";
+        window.location = "<?php echo $link['link']; ?>";
 }, 25);
-window.location = "instagram://story-camera/?effect_id=756766785146108";
+window.location = "instagram://story-camera/?effect_id=<?php echo $lines[4];?>";
 } else {
-window.location = "https://filter.ar/byredo/fallback";
+window.location = "<?php echo $link['link']; ?>";
 }
 </script>
 <?php
