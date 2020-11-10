@@ -46,10 +46,9 @@ a.link:hover { text-decoration: none; border-bottom: 1px solid red; color: red; 
 <tr<?php if (isset($_POST['new']) && $_POST['new'] == 1 && $x == 0) { echo " class='table-warning'"; }?>>
   <td nowrap>
     <a class="btn btn-sm btn-outline-secondary" href="#" data-toggle="modal" data-target="#QRModal" data-uri="<?php echo $links[$x]['uri'];?>">QR</a>
-    <a class="btn btn-sm btn-outline-secondary" href="#" data-toggle="modal" data-target="#editModal" data-uri="<?php echo $links[$x]['uri'];?>"><i class="far fa-edit"></i></a>
     </td>
   <td class="ellipsis" nowrap><a href="https://filter.ar/<?php echo $links[$x]['uri'];?>" data-url="https://filter.ar/<?php echo $links[$x]['uri'];?>" class="copyurl btn btn-sm btn-outline-secondary"><i class="far fa-copy"></i></a>&nbsp;<a class="link" href="https://filter.ar/<?php echo $links[$x]['uri'];?>" target="_new"><?php echo $links[$x]['title'];?></a><br />
-  <td class="ellipsis" nowrap><a class="link" href="<?php echo $links[$x]['link']?>" target="_new"><?php echo $links[$x]['link'];?></a></td>
+  <td class="ellipsis" nowrap><a class="btn btn-sm btn-outline-secondary" href="#" data-toggle="modal" data-target="#editModal" data-uri="<?php echo $links[$x]['uri'];?>"><i class="far fa-edit"></i></a>&nbsp;<a class="link" href="<?php echo $links[$x]['link']?>" target="_new"><?php echo $links[$x]['link'];?></a></td>
   <td style="width: 50px;"><?php echo $links[$x]['usage']?></td>
   <td class="text-right" nowrap>
     <div class="btn-group">
