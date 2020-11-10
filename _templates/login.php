@@ -3,7 +3,7 @@
   <div class="alert alert-danger" role="alert"><?php echo $message; ?></div>
 <?php } ?>
 
-<div class="row">
+<div class="row" style="margin-top: 20px;">
   <div class="col-6">
 <form method="post" action="">
   <input type="hidden" name="login" value="1" />
