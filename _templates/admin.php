@@ -101,7 +101,10 @@
         </button>
       </div>
       <div class="modal-body">
-        forthcoming.
+        <form>
+          <button class="btn btn-sm btn-outline-success">Update</button>
+          <a href="#" class="btn btn-sm btn-outline-danger" class="close" data-dismiss="modal" aria-label="Close">Cancel</a>
+        </form>
       </div>
     </div>
   </div>
