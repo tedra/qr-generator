@@ -50,7 +50,7 @@ a.link:hover { text-decoration: none; border-bottom: 1px solid red; color: red; 
     </td>
   <td class="ellipsis" nowrap><?php echo $links[$x]['title'];?></td>
   <td class="ellipsis" nowrap>
-    <a class="link" href="https://filter.ar/<?php echo $links[$x]['uri'];?>" target="_new"><?php echo $links[$x]['uri'];?></a>&nbsp;
+    <a class="link" href="https://filter.ar/<?php echo $links[$x]['uri'];?>" target="_new">https://filter.ar/<?php echo $links[$x]['uri'];?></a>&nbsp;
     <a href="https://filter.ar/<?php echo $links[$x]['uri'];?>" data-url="https://filter.ar/<?php echo $links[$x]['uri'];?>" class="copyurl btn btn-sm btn-outline-secondary"><i class="far fa-copy"></i></a>
   </td>
   <td class="ellipsis" nowrap>
