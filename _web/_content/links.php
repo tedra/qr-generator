@@ -48,7 +48,7 @@ a.link:hover { text-decoration: none; border-bottom: 1px solid red; color: red; 
     <a href="#" data-toggle="modal" data-target="#QRModal" data-uri="<?php echo $links[$x]['uri'];?>"><img src="/qr/<?php echo $links[$x]['uri']?>.svg" style="width: 80px; "/></a>
     </td>
   <td class="ellipsis" nowrap><a href="https://filter.ar/<?php echo $links[$x]['uri'];?>" data-url="https://filter.ar/<?php echo $links[$x]['uri'];?>" class="copyurl btn btn-sm btn-outline-secondary"><i class="far fa-copy"></i></a>&nbsp;<a class="link" href="https://filter.ar/<?php echo $links[$x]['uri'];?>" target="_new"><?php echo $links[$x]['title'];?></a><br />
-  <td class="ellipsis" nowrap><a class="btn btn-sm btn-outline-secondary" href="#" data-toggle="modal" data-target="#editModal" data-uri="<?php echo $links[$x]['uri'];?>"><i class="far fa-edit"></i></a>&nbsp;<a class="link" href="<?php echo $links[$x]['link']?>" target="_new"><?php echo $links[$x]['link'];?></a></td>
+  <td class="ellipsis" nowrap><a class="btn btn-sm btn-outline-secondary" href="#" data-toggle="modal" data-target="#editModal" data-id="<?php echo $links[$x]['id'];?>" data-forward="<?php echo $links[$x]['link'];?>" data-title="<?php echo $links[$x]['title'];?>" data-uri="<?php echo $links[$x]['uri'];?>"><i class="far fa-edit"></i></a>&nbsp;<a class="link" href="<?php echo $links[$x]['link']?>" target="_new"><?php echo $links[$x]['link'];?></a></td>
   <td style="width: 50px;"><?php echo $links[$x]['usage']?></td>
   <td class="text-right" nowrap>
     <div class="btn-group">
@@ -77,6 +77,17 @@ $('#QRModal').on('show.bs.modal', function (event) {
   var uri = button.data('uri')
   var modal = $(this)
   $('#qrmodalimg').attr('src',"/qr/"+uri+".png");
+})
+
+$('#editModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget)
+  var id = button.data('id');
+  var forward = button.data('forward');
+  var title = button.data('title');
+  var modal = $(this)
+  $('#idEdit').val(id);
+  $('#titleEdit').val(title);
+  $('#forwardEdit').val(forward);
 })
 
 function fallbackCopyTextToClipboard(text) {

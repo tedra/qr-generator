@@ -44,7 +44,7 @@
   </div>
 
   <div class="form-group">
-  <label for="exampleInputEmail1">Redirecting To:</label>
+  <label for="exampleInputEmail1">Forwarding To:</label>
   <input type="text" id="link" name="link" required class="form-control form-control-sm">
 </div>
 
@@ -101,8 +101,17 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
-          <button class="btn btn-sm btn-outline-success">Update</button>
+        <form method="post" action="" id="formEdit">
+          <input type="hidden" value="" name="idEdit" id="idEdit" />
+          <div class="form-group">
+          <label for="exampleInputEmail1">Title:</label>
+          <input type="text" id="titleEdit" name="titleEdit" required class="form-control form-control-sm">
+        </div>
+        <div class="form-group">
+        <label for="exampleInputEmail1">Forwarding To:</label>
+        <input type="text" id="forwardEdit" name="forwardEdit" required class="form-control form-control-sm">
+      </div>
+          <button id="updateEdit" class="btn btn-sm btn-outline-success">Update</button>
           <a href="#" class="btn btn-sm btn-outline-danger" class="close" data-dismiss="modal" aria-label="Close">Cancel</a>
         </form>
       </div>
@@ -121,6 +130,30 @@ $.ajax({
       $('.links').html(data);
     }
   });
+
+$('body').on('click','#updateEdit',function(e) {
+  e.stopPropagation();
+  e.preventDefault();
+  var id = $('#idEdit').val();
+  var title = $('#titleEdit').val();
+  var forward = $('#forwardEdit').val();
+  $.ajax({
+      type: "POST",
+      url: '/_content/update.php',
+      data: { ajax: 1, id: id, title: title, forward: forward },
+      success: function(data) {
+        $('#editModal').modal('hide');
+        $.ajax({
+            type: "POST",
+            url: '/_content/links.php',
+            data: { ajax: 1, new: 0 },
+            success: function(data) {
+              $('.links').fadeOut('fast',function(e) { $(this).html(data).fadeIn('fast'); });
+            }
+          });
+      }
+    });
+});
 
   $('body').on('click','#generate',function(e) {
     e.stopPropagation();
