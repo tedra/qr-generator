@@ -22,8 +22,11 @@ try {
  echo $e->getMessage();
 }
 
+$qrCode->setWriterByName('png');
 $qrCode->writeFile(__DIR__.'/../qr/'.$_POST['uri'].'.png');
+$qrCode->setWriterByName('svg');
 $qrCode->writeFile(__DIR__.'/../qr/'.$_POST['uri'].'.svg');
+$qrCode->setWriterByName('eps');
 $qrCode->writeFile(__DIR__.'/../qr/'.$_POST['uri'].'.eps');
 
 ?>
