@@ -191,6 +191,7 @@ $('body').on('click','#updateEdit',function(e) {
     $('#newcode-div').fadeOut('fast');
   });
 
+
   $('body').on('click','#newcode',function(e) {
     e.stopPropagation();
     e.preventDefault();
