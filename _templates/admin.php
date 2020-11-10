@@ -98,7 +98,6 @@ $.ajax({
         url: '/_content/generate.php',
         data: { title: title, forward: forward, scheme: scheme, domain: domain, uri: uri, ajax: 1 },
         success: function(data) {
-          alert(data);
           $('#newcode-div').fadeOut('fast');
           $('#title').val('');
           $('#link').val('');
