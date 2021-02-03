@@ -78,6 +78,7 @@ if (isset($uri[1]) && in_array($uri[1],$templates) && isset($_SESSION['loggedin'
 
     $lines = explode("/",$link['link']);
 
+if (isset($lines[2]) && $lines[2] == 'instagram.com') {
 ?>
 <script>
 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
@@ -90,9 +91,11 @@ window.location = "<?php echo $link['link']; ?>";
 }
 </script>
 <?php
-    //header('location:'.$link['link']);
     exit();
-  }
+  } else {
+    header('location:'.$link['link']);
+    exit();
+  }}
 } else {
 
   if (empty($_POST['ajax']) || $_POST['ajax'] < 1) {
